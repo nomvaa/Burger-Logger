@@ -17,7 +17,8 @@ var burger = {
       cb(res);
     });
   },
-  delete: function(conidtion, cb) {
+  delete: function(condition, cb) {
+    console.log("SECOND CON: ", condition)
     orm.delete("burgers", condition, function(res) {
       cb(res);
     });

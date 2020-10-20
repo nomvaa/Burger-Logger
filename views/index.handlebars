@@ -2,12 +2,14 @@
   <div class="row">
     <div class="col-md-4 offset-md-2">
       <h3>Burgers ready to eat</h3>
+
       <ul>
         {{#each burgers}}
           {{#unless this.devoured}}
-            <li class="burger-list">{{this.burger_name}}
+          {{> burgers/burger-block}}
+            {{!-- <li class="burger-list">{{this.burger_name}}
               <button type="button" class="btn btn-primary devour-btn" data-id="{{id}}">Devour it!</button>
-            </li>
+            </li> --}}
           {{/unless}}
         {{/each}}
       </ul>
@@ -34,9 +36,9 @@
       <form>
         <div class="form-group">
           <label id="input-label" for="add-burger-box">Order a burger</label>
-          <input type="text" class="form-control" id="add-burger-box" placeholder="Enter a burger name">
+          <input type="text" class="form-control" id="submit-burger" placeholder="Enter a burger name">
         </div>
-        <button type="submit" id="submit-burger" class="btn btn-primary">Order</button>
+        <button type="submit" id="submit" class="btn btn-primary">Order</button>
       </form>
     </div>
   </div>

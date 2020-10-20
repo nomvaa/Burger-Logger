@@ -53,7 +53,7 @@ var orm = {
     queryString += cols.toString();
     queryString += ") ";
     queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
+    queryString += `'${vals[0]}',${vals[1]}`;
     queryString += ") ";
 
     console.log(queryString);
@@ -86,11 +86,12 @@ var orm = {
   },
 
 
-  delete: function(tables, condition, cd) {
+  delete: function(tables, condition, cb) {
     var queryString = "DELETE FROM " + tables;
-    queryString += "WHERE ";
+    queryString += " WHERE ";
     queryString += condition;
 
+    console.log(queryString);
     connection.query(queryString, function (err, result) {
     if (err) {
       throw err;

@@ -1,43 +1,35 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-    $(".change-burger").on("click", function(event) {
+    $(".devour-btn").on("click", function(event) {
       var id = $(this).data("id");
-      var newBurger = $(this).data("newBurger");
-  
-      var newBurgerState = {
-        devoured: newBurger
+      
+      var newDevouredState = {
+        devoured: true
       };
-  
-      // Send the PUT request.
+      
       $.ajax("/api/burgers/" + id, {
         type: "PUT",
-        data: newBurgerState
+        data: newDevouredState
       }).then(
         function() {
-          console.log("change burger to ", newburger);
-          // Reload the page to get the updated list
           location.reload();
         }
       );
     });
-  
-    $(".create-form").on("submit", function(event) {
-      // Make sure to preventDefault on a submit event.
+    
+    $("#submit").on("click", function(event) {
       event.preventDefault();
-  
       var newBurger = {
-        name: $("#bur").val().trim(),
-        devoured: $("[name=devoured]:checked").val().trim()
+        burger_name: $("#submit-burger").val().trim(),
+        devoured: false
       };
-  
-      // Send the POST request.
+      console.log(newBurger)
+      
       $.ajax("/api/burgers", {
         type: "POST",
         data: newBurger
       }).then(
         function() {
-          console.log("created new burger");
-          // Reload the page to get the updated list
           location.reload();
         }
       );
@@ -45,9 +37,10 @@ $(function() {
   
     $(".delete-burger").on("click", function(event) {
       var id = $(this).data("id");
-  
+        
       // Send the DELETE request.
-      $.ajax("/api/burgers/" + id, {
+      console.log("deleting.....", id)
+      $.ajax(`/api/burgers?id=${id}`, {
         type: "DELETE"
       }).then(
         function() {
